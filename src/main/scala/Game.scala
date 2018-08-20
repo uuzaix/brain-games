@@ -25,20 +25,18 @@ object Game {
   }
 
   def round: Unit = {
-    val r = Random
-    val randomValue = r.nextInt(100)
+    val randomValue = Random.nextInt(100)
     println(s"Question: ${randomValue}")
     val answer = readLine()
-    val isEven = if (randomValue % 2 == 0) true else false
+    val isEven = randomValue % 2 == 0
     checkAnswer(answer, isEven)
   }
-
+  def game = {
+    println("""Answer "yes" if number even otherwise answer "no". Answer "stop" to stop the game""")
+    round
+  }
 
   def main(args: Array[String]): Unit = {
-    def game = {
-      println("""Answer "yes" if number even otherwise answer "no". Answer "stop" to stop the game""")
-      round
-    }
     game
   }
 }
