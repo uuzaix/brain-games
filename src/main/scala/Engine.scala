@@ -1,35 +1,39 @@
 import scala.io.StdIn.readLine
-
-import games.{Game, isEven, Calculations}
+import games.{Calculations, Game, isEven}
 
 case class Engine(game: Game) {
   def startGame(): Unit = {
     println(game.intro)
     runRound()
   }
-  def runRound(): Unit = {
+
+  private def runRound(): Unit = {
     val round = game.round
     println(round.question)
     val answer = readLine()
-    checkAnswer(answer, round.correctAnswer)
+    if (checkAnswer(answer, round.correctAnswer)) runRound()
   }
-  def checkAnswer(answer: String, correctAnswer: String): Unit = answer match {
-    case "stop" => println("The game is stopped")
+
+  private def checkAnswer(answer: String, correctAnswer: String): Boolean = answer match {
+    case "stop" => {
+      println("The game is stopped")
+      false
+    }
     case a if a == correctAnswer => {
-       println("Correct!")
-      runRound()
+      println("Correct!")
+      true
     }
     case _ => {
       println("Wrong!")
-      runRound()
+      true
     }
   }
 }
 
 object Engine {
   def main(args: Array[String]): Unit = {
-    val engine = new Engine(Calculations)
-//    val engine = new Engine(isEven)
+    val engine = Engine(Calculations)
+    //    val engine = Engine(isEven)
     engine.startGame()
   }
 }
