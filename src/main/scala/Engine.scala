@@ -3,6 +3,8 @@ import games.{Calculations, Game, isEven}
 
 case class Engine(game: Game) {
   def startGame(): Unit = {
+//    println(s"Game ${game.name} is started")
+    println("Game  is started")
     println(game.intro)
     runRound()
   }
@@ -31,9 +33,19 @@ case class Engine(game: Game) {
 }
 
 object Engine {
+  def selectGame(): String = {
+    println("Type the name of the game you want to play: Calculations, IsEven. Or press enter for default game.")
+    readLine()
+  }
+
   def main(args: Array[String]): Unit = {
-    val engine = Engine(Calculations)
-    //    val engine = Engine(isEven)
+    val gameName = if (args.isEmpty) selectGame() else args(0)
+
+    val engine = gameName match {
+      case "Calculations" => Engine(Calculations)
+      case "IsEven" => Engine(isEven)
+      case _ => Engine(isEven)
+    }
     engine.startGame()
   }
 }

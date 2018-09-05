@@ -3,6 +3,7 @@ package games
 import scala.util.Random
 
 case object Calculations extends Game {
+  val name = "Calculations"
   val intro = "What is the result of the expression?"
 
   def round: Round = {

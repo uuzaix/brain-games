@@ -3,6 +3,7 @@ package games
 import scala.util.Random
 
 case object isEven extends Game {
+  val name = "IsEven"
   val intro = """Answer "yes" if number even otherwise answer "no". Answer "stop" to stop the game"""
 
   def round: Round = {
